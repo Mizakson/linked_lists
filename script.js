@@ -13,4 +13,27 @@ class Node {
         this.value = null
         this.nextNode = null
     }
+
+
+    getValue() {
+        return this.value
+    } 
+
+    
+    setValue(value) {
+        this.value = value
+        return this.value
+    }
+
+
+    getNextNode() {
+        return this.nextNode
+    }
+
+
+    setNextNode(nextNode) {
+        this.nextNode = nextNode
+        return this.nextNode
+    }
+
 }
