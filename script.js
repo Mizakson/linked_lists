@@ -5,6 +5,64 @@ class LinkedList {
     constructor(head = null) {
         this.head = head
     }
+
+    append(value) {
+
+    }
+
+
+    prepend(value) {
+
+    }
+
+
+    getHead() {
+        return this.head
+    }
+
+
+    tail() {
+
+    }
+
+
+    at(index) {
+
+    }
+
+
+    pop() {
+
+    }
+
+
+    contains(value) {
+
+    }
+
+
+    find(value) {
+
+    }
+
+    
+    toString() {
+
+    }
+
+    /* 
+    EXTRA CREDIT
+    
+    insertAt(value, index) {
+
+    }
+
+    removeAt(index) {
+
+    }
+
+    */
+
 }
 
 
