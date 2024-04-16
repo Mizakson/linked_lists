@@ -2,104 +2,146 @@
 
 class LinkedList {
     constructor() {
-        this.list = []
+        this.head = null
+        this.length = 0
     }
-
 
     append(value) {
-        this.list.push(value)
-    }
+        let node = new Node(value)
+        let current
 
+        if (this.head == null) {
+            this.head = node
+            this.length++
+        } else {
+            current = this.head
+            while (current.nextNode) {
+                current = current.nextNode
+            }
+
+            current.nextNode = node
+        }
+
+        this.length++
+
+    }
 
     prepend(value) {
-        this.list.unshift(value)
+        this.head = new Node(value, this.head)
+        this.length++
     }
-
 
     size() {
-        return this.list.length
+        return this.length
     }
 
-
-    head() {
-        return this.list[0]
+    getListHead() {
+        return this.head
     }
 
+    getListTail() {
+        let current
+
+        if (this.head.nextNode == null) {
+            return this.head
+        } else {
+            current = this.head
+            while (current.nextNode) {
+                current = current.nextNode
+            }
+            return current
+        }
+        
+    }
 
     at(index) {
-        return this.list[index]
-    }
+        let current = this.head
+        let counter = 0
 
+        while (current) {
+            if (counter == index) {
+                return current
+            }
+            counter++
+            current = current.nextNode
+        }
+        return "VALUE DOESN'T EXIST YET"
+    }
 
     pop() {
-        this.list.pop()
-        return this.list
+        let tail = this.at(this.length - 1)
+        delete this[tail]
+        this.length--
+        return this
     }
-
 
     contains(value) {
-        for (let i = 0; i < this.list.length; i++) {
-            if (this.list[i].value === value) return true
+        let current
+        if (this.head.value === value) return true
+        if (this.head.nextNode.value !== null) {
+            current = this.head.nextNode
+            if (current.value === value) return true
             else {
-                return false
+                while (current.nextNode) {
+                    if (current.value === value) return true
+                    current = current.nextNode
+                }
+                if (current.value === value) return true
             }
         }
+        return false
     }
 
-
     find(value) {
+        // initial check
+        if (this.contains(value)) {
+            let index = 0
+            let current = this.head
+            while (current) {
+                if (current.value === value) {
+                    return index
+                }
+                current = current.nextNode
+                index++
+            }
+        }
         return null
+    }
+
+    toString() {
+        let current = this.head
+
+        let str = ""
+
+        while (current) {
+            str += ` (${current.value}) -> `
+            current = current.nextNode
+        }
+
+        return str
+        
     }
 
 }
 
 
 class Node {
-    constructor(value, nextNode) {
-        this.value = null
-        this.nextNode = null
-    }
-
-
-    getValue() {
-        return this.value
-    } 
-
-    
-    setValue(value) {
+    constructor(value = null, nextNode = null) {
         this.value = value
-        return this.value
-    }
-
-
-    getNextNode() {
-        return this.nextNode
-    }
-
-
-    setNextNode(nextNode) {
         this.nextNode = nextNode
-        return this.nextNode
     }
-
 }
 
-
-let test = new LinkedList()
-
-let node1 = new Node()
-node1.setValue(3)
-
-let node2 = new Node()
-node2.setValue(6)
-
-let node3 = new Node()
-node3.setValue(9)
-
-test.append(node1)
-test.append(node2)
-test.append(node3)
-node1.setNextNode(node2.value)
-node2.setNextNode(node3.value)
-
-console.log(test.list)
+var ll = new LinkedList()
+ll.prepend(300)
+ll.prepend(200)
+ll.prepend(100)
+ll.append(400)
+// console.log(ll.getListHead())
+// console.log(ll.getListTail())
+// console.log(ll.at(1)) // 200
+// console.log(ll.pop())
+// console.log(ll.contains(100)) // true
+// console.log(ll.contains(800)) // false
+console.log(ll.find(100))
+// console.log(ll.toString())
